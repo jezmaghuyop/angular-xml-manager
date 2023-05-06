@@ -202,7 +202,7 @@ export class AppComponent implements OnInit {
       return object;
     }
 
-    searchTerm = searchTerm.toLowerCase();
+    searchTerm = searchTerm.toString().toLowerCase();
 
     for (const key in object) {
       if (isChildObj == false) {
@@ -213,7 +213,7 @@ export class AppComponent implements OnInit {
         const value = object[key];
         if (typeof value === "object") {
           result.push(...this.searchObject(value, searchTerm, true));
-        } else if (typeof value === "string" && value.toLowerCase().includes(searchTerm)) {
+        } else if ((typeof value !== "object" && !Array.isArray(value)) && value.toString().toLowerCase().includes(searchTerm)) {
           result.push({ [this.currentSearchKey]: object });
         }
       }
